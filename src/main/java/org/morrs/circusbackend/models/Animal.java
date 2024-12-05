@@ -5,11 +5,11 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "animals")
 @Data
-@ToString()
 public class Animal {
 
     @Id
@@ -33,5 +33,17 @@ public class Animal {
     @ToString.Exclude
     private Artist artist;
 
+    @OneToMany(mappedBy = "animal")
+    @ToString.Exclude
+    private List<AnimalsTrainings> animalTrainings;
+
+    @ManyToMany
+    @JoinTable(
+            name = "animals_trainings",
+            joinColumns = @JoinColumn(name = "animal_num"),
+            inverseJoinColumns = @JoinColumn(name = "training_code")
+    )
+    @ToString.Exclude
+    private List<Training> trainings;
 
 }
