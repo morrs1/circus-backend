@@ -111,5 +111,6 @@ CREATE TABLE animals_trainings
 (
     animal_num INTEGER CHECK ( animal_num> 0 ) NOT NULL,
     training_code INTEGER CHECK ( training_code > 0 ) NOT NULL,
+    special_instructions TEXT,
     PRIMARY KEY (animal_num, training_code)
 );
