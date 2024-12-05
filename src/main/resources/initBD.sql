@@ -61,7 +61,7 @@ CREATE TABLE viewers
     v_surname      VARCHAR(100)                             NOT NULL,
     v_name         VARCHAR(100)                             NOT NULL,
     v_patronymic   VARCHAR(100)                             NOT NULL,
-    a_birth_date   DATE CHECK (a_birth_date > '1900-01-01') NOT NULL,
+    v_birth_date   DATE CHECK (v_birth_date > '1900-01-01') NOT NULL,
     PRIMARY KEY (num_viewer),
     UNIQUE (v_contact_info)
 );
@@ -87,8 +87,8 @@ CREATE TABLE tickets
     num_sale         INTEGER,
     PRIMARY KEY (ticket_code),
     UNIQUE (num_seat, performance_code),
-    FOREIGN KEY (performance_code) REFERENCES tickets_sale (num_sale)
-
+    FOREIGN KEY (performance_code) REFERENCES performances (per_code),
+    FOREIGN KEY (num_sale) REFERENCES tickets (ticket_code)
 );
 
 CREATE TABLE intervals
@@ -109,8 +109,8 @@ CREATE TABLE trainings
 
 CREATE TABLE animals_trainings
 (
-    animal_num INTEGER CHECK ( animal_num> 0 ) NOT NULL,
-    training_code INTEGER CHECK ( training_code > 0 ) NOT NULL,
+    animal_num           INTEGER CHECK ( animal_num > 0 )    NOT NULL,
+    training_code        INTEGER CHECK ( training_code > 0 ) NOT NULL,
     special_instructions TEXT,
     PRIMARY KEY (animal_num, training_code)
 );
