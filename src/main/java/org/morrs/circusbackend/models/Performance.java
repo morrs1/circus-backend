@@ -34,4 +34,9 @@ public class Performance {
     )
     @ToString.Exclude
     private List<Artist> artists;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "performance")
+    private List<Ticket> tickets;
+
 }
