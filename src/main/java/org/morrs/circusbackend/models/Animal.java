@@ -1,14 +1,15 @@
 package org.morrs.circusbackend.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "animals")
+@Data
+@ToString()
 public class Animal {
 
     @Id
@@ -27,8 +28,10 @@ public class Animal {
     @Column(name = "gender")
     private String gender;
 
-    @Column(name = "artist_num")
-    private int artistNum;
+    @ManyToOne()
+    @JoinColumn(name = "artist_num", referencedColumnName = "artist_num")
+    @ToString.Exclude
+    private Artist artist;
 
 
 }
