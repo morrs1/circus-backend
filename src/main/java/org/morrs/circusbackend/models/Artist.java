@@ -37,4 +37,8 @@ public class Artist {
     @OneToMany(mappedBy = "artist")
     @ToString.Exclude
     private List<Animal> animals;
+
+    @ManyToMany(mappedBy = "artists")
+    @ToString.Exclude
+    private List<Performance> performances;
 }
