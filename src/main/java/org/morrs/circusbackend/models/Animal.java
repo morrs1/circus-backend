@@ -1,5 +1,6 @@
 package org.morrs.circusbackend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
@@ -30,11 +31,13 @@ public class Animal {
 
     @ManyToOne()
     @JoinColumn(name = "artist_num", referencedColumnName = "artist_num")
+    @JsonIgnore
     @ToString.Exclude
     private Artist artist;
 
     @OneToMany(mappedBy = "animal")
     @ToString.Exclude
+    @JsonIgnore
     private List<AnimalsTrainings> animalTrainings;
 
     @ManyToMany
@@ -44,6 +47,7 @@ public class Animal {
             inverseJoinColumns = @JoinColumn(name = "training_code")
     )
     @ToString.Exclude
+    @JsonIgnore
     private List<Training> trainings;
 
 }
