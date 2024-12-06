@@ -45,7 +45,7 @@ CREATE TABLE performances
 
 CREATE TABLE artists_performances
 (
-    num_record INTEGER,
+    num_record SERIAL,
     artist_num INTEGER,
     per_code   INTEGER,
     PRIMARY KEY (num_record),
