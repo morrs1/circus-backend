@@ -11,6 +11,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
+@Transactional(readOnly = true)
 public class AnimalsService {
 
     private AnimalsRepository animalsRepository;
@@ -24,9 +25,9 @@ public class AnimalsService {
     }
 
     @Transactional
-    public void update(Animal artist, int id) {
-        artist.setAnimalNum(id);
-        animalsRepository.save(artist);
+    public void update(Animal animal, int id) {
+        animal.setAnimalNum(id);
+        animalsRepository.save(animal);
     }
 
     @Transactional
@@ -35,8 +36,8 @@ public class AnimalsService {
     }
 
     @Transactional
-    public void save(Animal artist) {
-        animalsRepository.save(artist);
+    public void save(Animal animal) {
+        animalsRepository.save(animal);
     }
 
 }
