@@ -2,6 +2,7 @@ package org.morrs.circusbackend.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "artists")
 @Data
+@NoArgsConstructor
 public class Artist {
 
     @Id
@@ -41,4 +43,22 @@ public class Artist {
     @ManyToMany(mappedBy = "artists")
     @ToString.Exclude
     private List<Performance> performances;
+
+    public Artist(
+            int artistNum,
+            String surname,
+            String name,
+            String patronymic,
+            LocalDate birthDate,
+            String speciality,
+            String contactInfo
+    ) {
+        this.artistNum = artistNum;
+        this.surname = surname;
+        this.name = name;
+        this.patronymic = patronymic;
+        this.birthDate = birthDate;
+        this.speciality = speciality;
+        this.contactInfo = contactInfo;
+    }
 }
