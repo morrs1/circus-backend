@@ -1,9 +1,9 @@
-SELECT p.per_code                                  AS код_представления,
-       p.name                                      AS название,
-       p.date                                      AS дата,
-       p.time                                      AS время,
-       COALESCE(artist_count.count_artists, 0)     AS количество_артистов,
-       COALESCE(ticket_count.available_tickets, 0) AS количество_доступных_билетов
+SELECT p.per_code                                  AS performance_code,
+       p.name                                      AS name,
+       p.date                                      AS date,
+       p.time                                      AS time,
+       COALESCE(artist_count.count_artists, 0)     AS amount_of_artists,
+       COALESCE(ticket_count.available_tickets, 0) AS amount_of_free_tickets
 FROM performances p
          LEFT JOIN
      (SELECT ap.per_code,
@@ -20,14 +20,14 @@ FROM performances p
 
 
 
-SELECT a.artist_num                                      AS номер_артиста,
-       a.a_surname                                       AS фамилия,
-       a.a_name                                          AS имя,
-       a.a_patronymic                                    AS отчество,
-       a.speciality                                      AS специальность,
-       EXTRACT(YEAR FROM AGE(a.a_birth_date))            AS возраст,
-       a.a_contact_info                                  AS контактная_информация,
-       COALESCE(performance_count.count_performances, 0) AS количество_представлений
+SELECT a.artist_num                                      AS artistNum,
+       a.a_surname                                       AS surname,
+       a.a_name                                          AS name,
+       a.a_patronymic                                    AS patronymic,
+       a.speciality                                      AS speciality,
+       EXTRACT(YEAR FROM AGE(a.a_birth_date))            AS age,
+       a.a_contact_info                                  AS contactInfo,
+       COALESCE(performance_count.count_performances, 0) AS amountOfPerformances
 FROM artists a
          LEFT JOIN
      (SELECT ap.artist_num,
@@ -37,37 +37,30 @@ FROM artists a
 
 
 
-SELECT
-    p.per_code AS код_представления,
-    COALESCE(sold_tickets.count_sold_tickets, 0) AS количество_проданных_билетов,
-    COALESCE(available_tickets.count_available_tickets, 0) AS количество_доступных_билетов,
-    CASE
-        WHEN COALESCE(available_tickets.count_available_tickets, 0) = 0 THEN 0
-        ELSE
-            CASE
-                WHEN COALESCE(sold_tickets.count_sold_tickets, 0) * 1.0 / available_tickets.count_available_tickets < 0.7 THEN 0
-                ELSE COALESCE(sold_tickets.count_sold_tickets, 0) * 1.0 / available_tickets.count_available_tickets
-                END
-        END AS соотношение_проданных_билетов_к_доступным
-FROM
-    performances p
-        LEFT JOIN
-    (SELECT
-         t.performance_code,
-         COUNT(t.ticket_code) - COUNT(ts.num_sale) AS count_available_tickets
-     FROM
-         tickets t
-             LEFT JOIN
-         tickets_sale ts ON t.num_sale = ts.num_sale
-     GROUP BY
-         t.performance_code) AS available_tickets ON p.per_code = available_tickets.performance_code
-        LEFT JOIN
-    (SELECT
-         t.performance_code,
-         COUNT(ts.num_sale) AS count_sold_tickets
-     FROM
-         tickets t
-             JOIN
-         tickets_sale ts ON t.num_sale = ts.num_sale
-     GROUP BY
-         t.performance_code) AS sold_tickets ON p.per_code = sold_tickets.performance_code;
+SELECT p.per_code                                             AS performanceCode,
+       COALESCE(sold_tickets.count_sold_tickets, 0)           AS amountOfSoldTickets,
+       COALESCE(available_tickets.count_available_tickets, 0) AS amountOfFreeTickets,
+       CASE
+           WHEN COALESCE(available_tickets.count_available_tickets, 0) = 0 THEN 0
+           ELSE
+               CASE
+                   WHEN COALESCE(sold_tickets.count_sold_tickets, 0) * 1.0 / available_tickets.count_available_tickets <
+                        0.7 THEN 0
+                   ELSE COALESCE(sold_tickets.count_sold_tickets, 0) * 1.0 / available_tickets.count_available_tickets
+                   END
+           END                                                AS ratioSoldTicketsToFreeTickets
+FROM performances p
+         LEFT JOIN
+     (SELECT t.performance_code,
+             COUNT(t.ticket_code) - COUNT(ts.num_sale) AS count_available_tickets
+      FROM tickets t
+               LEFT JOIN
+           tickets_sale ts ON t.num_sale = ts.num_sale
+      GROUP BY t.performance_code) AS available_tickets ON p.per_code = available_tickets.performance_code
+         LEFT JOIN
+     (SELECT t.performance_code,
+             COUNT(ts.num_sale) AS count_sold_tickets
+      FROM tickets t
+               JOIN
+           tickets_sale ts ON t.num_sale = ts.num_sale
+      GROUP BY t.performance_code) AS sold_tickets ON p.per_code = sold_tickets.performance_code;
