@@ -30,8 +30,11 @@
             <td th:text="${artist.contactInfo}"></td>
             <td>
                 <a th:href="@{/admin/{id}/edit(id=${artist.artistNum})}" class="btn btn-warning btn-sm">Обновить</a>
-                <a th:href="@{/artists/delete/{id}(id=${artist.artistNum})}" class="btn btn-danger btn-sm"
-                   onclick="return confirm('Вы уверены, что хотите удалить этого артиста?');">Удалить</a>
+                <form th:method="DELETE" th:action="@{/admin/{id}(id=${artist.getArtistNum()})}"
+                      class="btn btn-danger btn-sm"
+                      onclick="return confirm('Вы уверены, что хотите удалить этого артиста?');">
+                    <input type="submit" value="Удалить"/>
+                </form>
             </td>
         </tr>
         </tbody>
