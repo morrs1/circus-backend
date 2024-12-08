@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -24,7 +25,7 @@ public class ArtistsService {
     }
 
     @Transactional
-    public void update(Artist artist, int id) {
+    public void update(Artist artist, UUID id) {
         artist.setArtistNum(id);
         artistsRepository.save(artist);
     }
