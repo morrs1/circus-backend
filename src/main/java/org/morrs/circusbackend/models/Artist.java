@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "artists")
@@ -16,7 +17,7 @@ public class Artist {
 
     @Id
     @Column(name = "artist_num")
-    private int artistNum;
+    private UUID artistNum = UUID.randomUUID();
 
     @Column(name = "a_surname")
     private String surname;
@@ -45,7 +46,7 @@ public class Artist {
     private List<Performance> performances;
 
     public Artist(
-            int artistNum,
+            UUID artistNum,
             String surname,
             String name,
             String patronymic,

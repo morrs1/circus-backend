@@ -26,7 +26,6 @@ public class AdminController {
 
     @PostMapping("/123")
     public String create(@ModelAttribute("artist") Artist artist) {
-        artist.setArtistNum(100);
         artistsService.save(artist);
         return "admin/index-admin";
     }
