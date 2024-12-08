@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS viewers;
 
 CREATE TABLE artists
 (
-    artist_num     INTEGER CHECK (artist_num > 0),
+    artist_num     UUID,
     a_surname      VARCHAR(100)                             NOT NULL,
     a_name         VARCHAR(100)                             NOT NULL,
     a_patronymic   VARCHAR(100)                             NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE animals
     nickname      VARCHAR(100)                              NOT NULL,
     date_of_birth DATE CHECK (date_of_birth > '1900-01-01') NOT NULL,
     gender        VARCHAR(10)                               NOT NULL,
-    artist_num    INTEGER,
+    artist_num    UUID,
     PRIMARY KEY (animal_num),
     FOREIGN KEY (artist_num) REFERENCES artists (artist_num)
 );
@@ -46,7 +46,7 @@ CREATE TABLE performances
 CREATE TABLE artists_performances
 (
     num_record SERIAL,
-    artist_num INTEGER,
+    artist_num UUID,
     per_code   INTEGER,
     PRIMARY KEY (num_record),
     FOREIGN KEY (artist_num) REFERENCES artists (artist_num),

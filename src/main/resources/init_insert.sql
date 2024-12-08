@@ -1,17 +1,24 @@
 INSERT INTO artists (artist_num, a_surname, a_name, a_patronymic, a_birth_date, speciality, a_contact_info)
-VALUES (1, 'Иванов', 'Иван', 'Иванович', '1980-05-15', 'Клоун', 'ivanov@example.com'),
-       (2, 'Петров', 'Петр', 'Петрович', '1985-07-20', 'Акробат', 'petrov@example.com'),
-       (3, 'Сидоров', 'Сергей', 'Сергеевич', '1990-03-10', 'Жонглер', 'sidorov@example.com'),
-       (4, 'Кузнецов', 'Алексей', 'Алексеевич', '1975-11-30', 'Фокусник', 'kuznetsov@example.com'),
-       (5, 'Смирнов', 'Дмитрий', 'Дмитриевич', '1982-09-05', 'Гимнаст', 'smirnov@example.com');
+VALUES ('3f3b1c2e-5c3e-4b8b-9c1e-1b2c3d4e5f6a', 'Иванов', 'Иван', 'Иванович', '1980-05-15', 'Клоун',
+        'ivanov@example.com'),
+       ('6f7e8d9c-0b1a-2c3d-4e5f-6a7b8c9d0e1f', 'Петров', 'Петр', 'Петрович', '1985-07-20', 'Акробат',
+        'petrov@example.com'),
+       ('1e2f3a4b-5c6d-7e8f-9a0b-1c2d3e4f5a6b', 'Сидоров', 'Сергей', 'Сергеевич', '1990-03-10', 'Жонглер',
+        'sidorov@example.com'),
+       ('9b8c7d6e-5f4a-3b2c-1d0e-9f8e7d6c5b4a', 'Кузнецов', 'Алексей', 'Алексеевич', '1975-11-30', 'Фокусник',
+        'kuznetsov@example.com'),
+       ('4d3c2b1a-0e9f-8a7b-6c5d-4e3f2a1b0c9a', 'Смирнов', 'Дмитрий', 'Дмитриевич', '1982-09-05', 'Гимнаст',
+        'smirnov@example.com');
+
+
 
 
 INSERT INTO animals (animal_num, species, nickname, date_of_birth, gender, artist_num)
-VALUES (1, 'Собака', 'Рекс', '2015-03-20', 'Мужской', 1),
-       (2, 'Кошка', 'Мурка', '2016-05-12', 'Женский', 2),
-       (3, 'Лошадь', 'Буцефал', '2010-08-25', 'Мужской', 3),
-       (4, 'Слон', 'Думбо', '2005-12-01', 'Мужской', 4),
-       (5, 'Тигр', 'Шерхан', '2012-07-15', 'Мужской', 5);
+VALUES (1, 'Собака', 'Рекс', '2015-03-20', 'Мужской', '3f3b1c2e-5c3e-4b8b-9c1e-1b2c3d4e5f6a'),
+       (2, 'Кошка', 'Мурка', '2016-05-12', 'Женский', '6f7e8d9c-0b1a-2c3d-4e5f-6a7b8c9d0e1f'),
+       (3, 'Лошадь', 'Буцефал', '2010-08-25', 'Мужской', '1e2f3a4b-5c6d-7e8f-9a0b-1c2d3e4f5a6b'),
+       (4, 'Слон', 'Думбо', '2005-12-01', 'Мужской', '9b8c7d6e-5f4a-3b2c-1d0e-9f8e7d6c5b4a'),
+       (5, 'Тигр', 'Шерхан', '2012-07-15', 'Мужской', '4d3c2b1a-0e9f-8a7b-6c5d-4e3f2a1b0c9a');
 
 
 INSERT INTO performances (per_code, name, date, time)
@@ -23,11 +30,11 @@ VALUES (1, 'Вечерний спектакль', '2023-10-01', '19:00:00'),
 
 
 INSERT INTO artists_performances (artist_num, per_code)
-VALUES (1, 1),
-       (2, 2),
-       (3, 3),
-       (4, 4),
-       (5, 5);
+VALUES ('3f3b1c2e-5c3e-4b8b-9c1e-1b2c3d4e5f6a', 1),
+       ('6f7e8d9c-0b1a-2c3d-4e5f-6a7b8c9d0e1f', 2),
+       ('1e2f3a4b-5c6d-7e8f-9a0b-1c2d3e4f5a6b', 3),
+       ('9b8c7d6e-5f4a-3b2c-1d0e-9f8e7d6c5b4a', 4),
+       ('4d3c2b1a-0e9f-8a7b-6c5d-4e3f2a1b0c9a', 5);
 
 
 INSERT INTO viewers (num_viewer, v_contact_info, v_surname, v_name, v_patronymic, v_birth_date)
