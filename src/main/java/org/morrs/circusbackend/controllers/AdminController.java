@@ -57,5 +57,10 @@ public class AdminController {
         return "admin/index-admin";
     }
 
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") UUID id) {
+        artistsService.delete(id);
+        return "admin/index-admin";
+    }
 
 }
