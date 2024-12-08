@@ -31,7 +31,7 @@ CREATE TABLE animals
     gender        VARCHAR(10)                               NOT NULL,
     artist_num    UUID,
     PRIMARY KEY (animal_num),
-    FOREIGN KEY (artist_num) REFERENCES artists (artist_num)
+    FOREIGN KEY (artist_num) REFERENCES artists (artist_num) ON DELETE SET NULL
 );
 
 CREATE TABLE performances
@@ -49,7 +49,7 @@ CREATE TABLE artists_performances
     artist_num UUID,
     per_code   INTEGER,
     PRIMARY KEY (num_record),
-    FOREIGN KEY (artist_num) REFERENCES artists (artist_num),
+    FOREIGN KEY (artist_num) REFERENCES artists (artist_num) ON DELETE CASCADE,
     FOREIGN KEY (per_code) REFERENCES performances (per_code),
     UNIQUE (artist_num, per_code)
 );
