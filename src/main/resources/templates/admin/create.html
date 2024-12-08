@@ -8,7 +8,7 @@
 <body>
 <div class="container" style="margin-top: 50px;">
     <h1>Создать артиста</h1>
-    <form th:action="@{/admin/123}" method="post" th:object="${artist}">
+    <form th:action="@{/admin}" method="post" th:object="${artist}">
         <div class="form-group">
             <label for="surname">Фамилия</label>
             <input type="text" id="surname" th:field="*{surname}" class="form-control" required>
