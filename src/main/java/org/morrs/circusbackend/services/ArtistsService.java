@@ -20,7 +20,7 @@ public class ArtistsService {
         return artistsRepository.findAll();
     }
 
-    public Artist read(int id) {
+    public Artist read(UUID id) {
         return artistsRepository.findById(id).orElse(null);
     }
 
@@ -31,7 +31,7 @@ public class ArtistsService {
     }
 
     @Transactional
-    public void delete(int id) {
+    public void delete(UUID id) {
         artistsRepository.deleteById(id);
     }
 
