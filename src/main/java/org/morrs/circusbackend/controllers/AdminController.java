@@ -2,6 +2,7 @@ package org.morrs.circusbackend.controllers;
 
 import lombok.AllArgsConstructor;
 import org.morrs.circusbackend.models.Artist;
+import org.morrs.circusbackend.repo.TicketsReportRepository;
 import org.morrs.circusbackend.services.ArtistsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import java.util.UUID;
 public class AdminController {
 
     private ArtistsService artistsService;
+    private TicketsReportRepository ticketsReportRepository;
 
     @GetMapping("")
     public String index() {
@@ -63,4 +65,9 @@ public class AdminController {
         return "admin/index-admin";
     }
 
+    @GetMapping("/tickets-report")
+    public String ticketsReport(Model model) {
+        model.addAttribute("tickets", ticketsReportRepository.getReport());
+        return "admin/tickets-report";
+    }
 }
