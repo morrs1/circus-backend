@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Список билетов</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container text-center" style="margin-top: 100px;">
+  <h1>Список билетов</h1>
+
+  <div class="mt-5">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Номер билета</th>
+        <th>Код представления</th>
+        <th>Номер места</th>
+        <th>Цена</th>
+        <th>Действия</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="ticket : ${freeTickets}">
+        <td th:text="${ticket.getTicketCode()}"></td>
+        <td th:text="${ticket.getPerformance().getPerCode()}"></td>
+        <td th:text="${ticket.getNumSeat()}"></td>
+        <td th:text="${ticket.getPrice()}"></td>
+        <td>
+<!--          <a th:if="${ticket.getTicketsSale() == null}"-->
+<!--             th:href="@{/viewer/buy-ticket/{id}(id=${ticket.getTicketCode()})}"-->
+<!--             class="btn btn-info">Купить</a>-->
+          <form th:method="POST" th:action="@{/viewer/buy-ticket/{id}(id=${ticket.getTicketCode()})}"
+                class="btn btn-danger btn-sm">
+            <input type="submit" value="Купить"/>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
