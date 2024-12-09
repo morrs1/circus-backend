@@ -2,9 +2,11 @@ package org.morrs.circusbackend.dto;
 
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 public class ArtistReport {
-    private int artistNum;
+    private UUID artistNum;
     private String surname;
     private String name;
     private String patronymic;
