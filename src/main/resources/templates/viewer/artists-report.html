@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Отчет по артистам</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container text-center" style="margin-top: 100px;">
+    <h1>Отчет по артистам</h1>
+
+    <div class="mt-5">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Специальность</th>
+                <th>Возраст</th>
+                <th>Контактная информация</th>
+                <th>Количество представлений</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="artist : ${artistsReport}">
+                <td th:text="${artist.surname}"></td>
+                <td th:text="${artist.name}"></td>
+                <td th:text="${artist.patronymic}"></td>
+                <td th:text="${artist.speciality}"></td>
+                <td th:text="${artist.age}"></td>
+                <td th:text="${artist.contactInfo}"></td>
+                <td th:text="${artist.amountOfPerformances}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
