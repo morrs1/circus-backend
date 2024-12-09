@@ -69,7 +69,7 @@ CREATE TABLE viewers
 
 CREATE TABLE tickets_sale
 (
-    num_sale      INTEGER CHECK ( num_sale > 0 ),
+    num_sale      SERIAL,
     purchase_date DATE CHECK ( purchase_date > '2000-01-01' ) NOT NULL,
     payment_type  VARCHAR(100)                                NOT NULL,
     viewer_num    INTEGER,
