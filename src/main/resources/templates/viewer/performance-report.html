@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Отчет по представлениям</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container text-center" style="margin-top: 100px;">
+    <h1>Отчет по представлениям</h1>
+
+    <div class="mt-5">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Код представления</th>
+                <th>Название</th>
+                <th>Дата</th>
+                <th>Время</th>
+                <th>Количество артистов</th>
+                <th>Количество свободных билетов</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="performance : ${performancesReport}">
+                <td th:text="${performance.performanceCode}"></td>
+                <td th:text="${performance.name}"></td>
+                <td th:text="${performance.date}"></td>
+                <td th:text="${performance.time}"></td>
+                <td th:text="${performance.amountOfArtists}"></td>
+                <td th:text="${performance.amountOfFreeTickets}"></td>
+                <td>
+                    <a th:if="${performance.amountOfFreeTickets > 0}"
+                       th:href="@{/viewer/{id}/tickets(id=${performance.performanceCode})}"
+                       class="btn btn-info">Купить билеты</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
