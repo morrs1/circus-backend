@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Отчет по билетам</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container text-center" style="margin-top: 100px;">
+    <h1>Отчет по билетам</h1>
+
+    <div class="mt-5">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Код представления</th>
+                <th>Количество проданных билетов</th>
+                <th>Количество свободных билетов</th>
+                <th>Требует ли представление пересмотра</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ticket : ${tickets}">
+                <td th:text="${ticket.performanceCode}"></td>
+                <td th:text="${ticket.amountOfSoldTickets}"></td>
+                <td th:text="${ticket.amountOfFreeTickets}"></td>
+                <td th:text="${ticket.ratioSoldTicketsToFreeTickets}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
