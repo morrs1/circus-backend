@@ -17,10 +17,10 @@ public class TicketsSale {
     private int numSale;
 
     @Column(name = "purchase_date")
-    private LocalDate purchaseDate;
+    private LocalDate purchaseDate = LocalDate.now();
 
     @Column(name = "payment_type")
-    private String paymentType;
+    private String paymentType = "Банковская карта";
 
     @OneToMany(mappedBy = "ticketsSale")
     private List<Ticket> tickets;
