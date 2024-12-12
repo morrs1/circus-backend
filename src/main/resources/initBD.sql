@@ -88,7 +88,7 @@ CREATE TABLE tickets
     PRIMARY KEY (ticket_code),
     UNIQUE (num_seat, performance_code),
     FOREIGN KEY (performance_code) REFERENCES performances (per_code),
-    FOREIGN KEY (num_sale) REFERENCES tickets (ticket_code)
+    FOREIGN KEY (num_sale) REFERENCES tickets_sale (num_sale)
 );
 
 CREATE TABLE intervals
@@ -112,5 +112,7 @@ CREATE TABLE animals_trainings
     animal_num           INTEGER CHECK ( animal_num > 0 )    NOT NULL,
     training_code        INTEGER CHECK ( training_code > 0 ) NOT NULL,
     special_instructions TEXT,
-    PRIMARY KEY (animal_num, training_code)
+    PRIMARY KEY (animal_num, training_code),
+    FOREIGN KEY (animal_num) references animals (animal_num),
+    FOREIGN KEY (training_code) references trainings (training_code)
 );
