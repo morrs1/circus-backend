@@ -1,12 +1,15 @@
 package org.morrs.circusbackend.controllers;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.Value;
 import org.morrs.circusbackend.models.Artist;
 import org.morrs.circusbackend.repo.TicketsReportRepository;
 import org.morrs.circusbackend.services.ArtistsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.format.DateTimeFormatter;
@@ -54,7 +57,10 @@ public class AdminController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("artist") Artist artist, @PathVariable UUID id) {
+    public String update( @PathVariable UUID id, @ModelAttribute("artist") @Valid Artist artist, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "admin/edit";
+        }
         artistsService.update(artist, id);
         return "admin/index-admin";
     }
